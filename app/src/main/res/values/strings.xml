@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Capway</string>
+    <string name="application_title">Account</string>
+    <string name="account_menu_title">Account</string>
+    <string name="send_menu_title">Send</string>
+    <string name="more_menu_title">More</string>
+    <string name="learn_menu_title">Learn</string>
+    <string name="phunds_menu_title">Phunds</string>
+</resources>
