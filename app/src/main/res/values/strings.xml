@@ -6,4 +6,10 @@
     <string name="more_menu_title">More</string>
     <string name="learn_menu_title">Learn</string>
     <string name="phunds_menu_title">Phunds</string>
+    <string name="transactions_title">Transactions</string>
+    <string name="money_goals_title">Money Goals</string>
+    <string name="activity_title">Activity</string>
+    <string name="statements_title">Statements</string>
+    <string name="account_settings_title">Account Settings</string>
+    <string name="alert_title">Alert</string>
 </resources>

@@ -10,6 +10,8 @@
     <color name="capway_offwhite">#FFF5F5F5</color>
     <color name="capway_grey">#FF616161</color>
     <color name="capway_light_grey">#FFB5B5B5</color>
+    <color name="capway_text_grey">#FF969696</color>
     <color name="capway_border">#FFE0E0E0</color>
     <color name="capway_selected_menu">#FF80c3e2</color>
+    <color name="capway_blue">#FF49abd7</color>
 </resources>

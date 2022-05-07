@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <HorizontalScrollView
+        android:id="@+id/account_top_nav_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/transaction_nav_tab"
+                android:text="@string/transactions_title" />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/money_goals_nav_tab"
+                android:text="@string/money_goals_title" />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/activity_nav_tab"
+                android:text="@string/activity_title" />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/statements_nav_tab"
+                android:text="@string/statements_title"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/account_settings_nav_tab"
+                android:text="@string/account_settings_title"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/navBarButton"
+                android:id="@+id/alert_nav_tab"
+                android:text="@string/alert_title" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <LinearLayout
+        android:id="@+id/account_internal_fragment_container"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/account_top_nav_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
