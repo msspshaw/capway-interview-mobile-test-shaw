@@ -13,4 +13,34 @@
         <item name="android:background">@drawable/button_background</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="accountBalance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@color/capway_solid_text</item>
+    </style>
+    <style name="accountBalanceTitle">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/capway_light_gray_low_alpha_text</item>
+    </style>
+    <style name="pendingCharges">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/capway_light_gray_low_alpha_text</item>
+    </style>
+    <style name="pendingChargesTitle">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/capway_black_text</item>
+    </style>
+    <style name="capwayCardTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/capway_solid_text</item>
+    </style>
+    <style name="cardStatus">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/capway_black_text</item>
+    </style>
+    <style name="anchorText">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@drawable/anchor_text_color</item>
+    </style>
 </resources>
