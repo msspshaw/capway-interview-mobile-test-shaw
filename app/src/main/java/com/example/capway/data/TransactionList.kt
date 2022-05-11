@@ -1,11 +1,7 @@
 package com.example.capway.data
 
 class TransactionList(val transactions: List<Transaction>) {
-    fun withdrawls() : List<Transaction> {
-        return transactions.filter { transaction -> transaction.transactionType == TransactionType.WITHDRAWL }
-    }
+    val withdrawals : List<Transaction> = transactions.filter { transaction -> transaction.transactionType == TransactionType.WITHDRAWAL }
 
-    fun deposits(): List<Transaction> {
-        return transactions.filter { transaction -> transaction.transactionType == TransactionType.DEPOSIT }
-    }
+    val deposits: List<Transaction> = transactions.filter { transaction -> transaction.transactionType == TransactionType.DEPOSIT }
 }

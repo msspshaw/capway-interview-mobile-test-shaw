@@ -6,6 +6,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/scroll_child"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/account_info"
             android:layout_width="match_parent"
@@ -115,7 +120,49 @@
                 android:layout_marginLeft="12dp"
                 android:text="@string/add_funds"
                 style="@style/anchorText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/transactions_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tabIndicatorColor="@color/capway_darker_blue"
+                app:tabSelectedTextColor="@color/capway_black_text_light"
+                app:tabTextColor="@color/capway_light_gray_low_alpha_text"
+                app:tabTextAppearance="@style/tabLayout">
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/transaction_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/transactions"/>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/deposits_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/deposits"/>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/withdrawals_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/withdrawals"/>
+            </com.google.android.material.tabs.TabLayout>
+        <LinearLayout
+            android:id="@+id/transactions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
