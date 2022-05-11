@@ -2,9 +2,13 @@ package com.example.capway
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,7 +18,7 @@ import com.example.capway.data.Transaction
 import com.google.android.material.tabs.TabLayout
 
 
-class TransactionsFragment: Fragment(), View.OnClickListener {
+class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher {
     // load test account
     private val account = Account.generateTestAccount()
 
@@ -25,6 +29,9 @@ class TransactionsFragment: Fragment(), View.OnClickListener {
     lateinit var addFunds: TextView
     lateinit var tabLayout: TabLayout
     lateinit var transactions: LinearLayout
+    lateinit var searchText: EditText
+    lateinit var searchEndImage: ImageView
+    lateinit var searchEndImageFilled: ImageView
     lateinit var currentTransactions: List<Transaction>
 
     override fun onCreateView(
@@ -39,6 +46,9 @@ class TransactionsFragment: Fragment(), View.OnClickListener {
         virtualCard = view.findViewById(R.id.virtual_card)
         addFunds = view.findViewById(R.id.add_funds)
         tabLayout = view.findViewById(R.id.tab_layout)
+        searchText = view.findViewById(R.id.search_text)
+        searchEndImage = view.findViewById(R.id.search_end_image)
+        searchEndImageFilled = view.findViewById(R.id.search_end_image_filled)
         transactions = view.findViewById(R.id.transactions)
 
         accountBalance.text = getString(R.string.money_text, Formatter.formatDoubleToMoney(account.balance))
@@ -47,6 +57,7 @@ class TransactionsFragment: Fragment(), View.OnClickListener {
 
         virtualCard.setOnClickListener(this)
         addFunds.setOnClickListener(this)
+        searchText.addTextChangedListener(this)
 
         // default to all transactions
         currentTransactions = account.transactions.transactions
@@ -118,5 +129,24 @@ class TransactionsFragment: Fragment(), View.OnClickListener {
             val transactionCell = context?.let { TransactionCell(it, transaction) }
             transactions.addView(transactionCell)
         }
+    }
+
+    override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        // Not needed
+    }
+
+    override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        val notEmpty = text?.length ?: 0 > 0
+        if (notEmpty) {
+            searchEndImage.visibility = View.GONE
+            searchEndImageFilled.visibility = View.VISIBLE
+        } else {
+            searchEndImage.visibility = View.VISIBLE
+            searchEndImageFilled.visibility = View.GONE
+        }
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        // Not needed
     }
 }
