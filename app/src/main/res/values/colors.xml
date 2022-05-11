@@ -15,7 +15,12 @@
     <color name="capway_selected_menu">#FF80c3e2</color>
     <color name="capway_blue">#FF49abd7</color>
     <color name="capway_solid_text">#FF303131</color>
-    <color name="capway_light_gray_low_alpha_text">#FFcbcbcb</color>
+    <color name="capway_light_gray_low_alpha_text">#AAcbcbcb</color>
     <color name="capway_black_text">#FF7A7A7A</color>
     <color name="capway_anchor_color">#FF6ec1e3</color>
+    <color name="capway_darker_blue">#FF69bae4</color>
+    <color name="capway_black_text_light">#FF444444</color>
+    <color name="capway_light_gray_mid_alpha_text">#DDacacac</color>
+    <color name="positive">#FF77c9b4</color>
+    <color name="negative">#FFec7478</color>
 </resources>
