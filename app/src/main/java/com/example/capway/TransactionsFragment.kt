@@ -1,16 +1,17 @@
 package com.example.capway
 
 import android.app.AlertDialog
+import android.content.res.Resources
+import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.capway.data.Account
 import com.example.capway.data.Formatter
@@ -18,7 +19,7 @@ import com.example.capway.data.Transaction
 import com.google.android.material.tabs.TabLayout
 
 
-class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher {
+class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher, View.OnScrollChangeListener {
     // load test account
     private val account = Account.generateTestAccount()
 
@@ -33,6 +34,10 @@ class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher {
     lateinit var searchEndImage: ImageView
     lateinit var searchEndImageFilled: ImageView
     lateinit var currentTransactions: List<Transaction>
+    lateinit var scrollView: ScrollView
+    lateinit var loading: ProgressBar
+    lateinit var header: ConstraintLayout
+    lateinit var headerAccountBalance: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,18 +55,28 @@ class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher {
         searchEndImage = view.findViewById(R.id.search_end_image)
         searchEndImageFilled = view.findViewById(R.id.search_end_image_filled)
         transactions = view.findViewById(R.id.transactions)
+        scrollView = view.findViewById(R.id.scroll_view)
+        loading = view.findViewById(R.id.loading)
+        header = view.findViewById(R.id.header)
+        headerAccountBalance = view.findViewById(R.id.header_account_balance)
+
+        scrollView.setOnScrollChangeListener(this)
 
         accountBalance.text = getString(R.string.money_text, Formatter.formatDoubleToMoney(account.balance))
         pendingCharges.text = getString(R.string.money_text, Formatter.formatDoubleToMoney(account.pendingCharges))
         cardStatus.text = getString(R.string.card_status, account.card.lastFour.toString(), account.card.status.statusReadable)
+        headerAccountBalance.text = getString(R.string.money_text, Formatter.formatDoubleToMoney(account.balance))
 
         virtualCard.setOnClickListener(this)
         addFunds.setOnClickListener(this)
         searchText.addTextChangedListener(this)
 
+        resetScrollBelowTop()
+
         // default to all transactions
         currentTransactions = account.transactions.transactions
         displayTransactions()
+
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -148,5 +163,55 @@ class TransactionsFragment: Fragment(), View.OnClickListener, TextWatcher {
 
     override fun afterTextChanged(p0: Editable?) {
         // Not needed
+    }
+
+    override fun onScrollChange(
+        view: View?,
+        scrollX: Int,
+        scrollY: Int,
+        oldScrollX: Int,
+        oldScrollY: Int) {
+        // If we're scrolling up, and we're near the top (25 pixels)
+        // we show loading with a second timer, then hide it and make sure
+        // we scroll to 1
+        if (scrollY < oldScrollY && scrollY < 25) {
+            // show loading
+            loading.visibility = View.VISIBLE
+            val handler = Handler()
+            handler.postDelayed(Runnable { // Write whatever to want to do after delay specified (1 sec)
+                loading.visibility = View.GONE
+                resetScrollBelowTop()
+            }, 1000)
+        }
+        // When search is no longer, we have scrolled high enough on screen to change
+        // the visibility of the header
+        if (!isVisible(searchText)) {
+            header.visibility = View.VISIBLE
+        } else {
+            header.visibility = View.GONE
+        }
+    }
+
+    // A simple implementation of pull to refresh, we simply need to scroll to
+    // y = 1 in order to allow a scroll up at the top of the screen.
+    private fun resetScrollBelowTop() {
+        scrollView.post(Runnable { //setting position here :
+            scrollView.scrollTo(0, 1)
+        })
+    }
+
+    private fun isVisible(view: View?): Boolean {
+        if (view == null) {
+            return false
+        }
+        if (!view.isShown) {
+            return false
+        }
+        val actualPosition = Rect()
+        view.getGlobalVisibleRect(actualPosition)
+        val width = Resources.getSystem().displayMetrics.widthPixels
+        val height = Resources.getSystem().displayMetrics.heightPixels
+        val screen = Rect(0, 0, width, height)
+        return actualPosition.intersect(screen)
     }
 }
