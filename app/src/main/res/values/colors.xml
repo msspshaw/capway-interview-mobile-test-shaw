@@ -14,4 +14,8 @@
     <color name="capway_border">#FFE0E0E0</color>
     <color name="capway_selected_menu">#FF80c3e2</color>
     <color name="capway_blue">#FF49abd7</color>
+    <color name="capway_solid_text">#FF303131</color>
+    <color name="capway_light_gray_low_alpha_text">#FFcbcbcb</color>
+    <color name="capway_black_text">#FF7A7A7A</color>
+    <color name="capway_anchor_color">#FF6ec1e3</color>
 </resources>
